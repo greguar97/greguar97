@@ -35,7 +35,7 @@ public class Comb
             da.Fill(ds);
             comboBox1.DataSource = ds.Tables[0];
             comboBox1.DisplayMember = "roles";
-            cn.Close();
+            cn.stop();
 
 
         }
