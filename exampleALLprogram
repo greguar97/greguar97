@@ -1,0 +1,41 @@
+  public class Connect
+  {
+              public string server = "localhost"; //имя сервера
+              public string port = "5432";        //порт 
+              public string user = "greguarpass123456";    //имя юзверя
+              public string password = "123456";       //пароль юзверя
+              public string nameDB = "Kyrsach";      //имя базы данных
+              public string con = string.Format("Server={0};Port={1};User={2};Password={3};Database={4};",
+               server, port, user, password, nameDB);
+               
+         public void  start()
+        {
+            NpgsqlConnection npgSqlConnection = new NpgsqlConnection(con);
+            npgSqlConnection.Open();
+        }
+           public void  stop()
+        {
+            NpgsqlConnection npgSqlConnection = new NpgsqlConnection(con);
+            npgSqlConnection.Close();
+        }
+
+        }
+public class Comb
+        {
+            Connect cn = new Connect();
+            cn.start();
+            
+            string sql = ("SELECT role FROM Users");
+            
+            DataSet ds = new DataSet();
+            DataTable dt = new DataTable();
+            NpgsqlDataAdapter da = new NpgsqlDataAdapter(sql, con);
+            ds.Reset();
+            comboBox1.DataSource = dt;
+            da.Fill(ds);
+            comboBox1.DataSource = ds.Tables[0];
+            comboBox1.DisplayMember = "roles";
+            cn.Close();
+
+
+        }
